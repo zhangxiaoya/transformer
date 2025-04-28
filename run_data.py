@@ -3,6 +3,7 @@ import logging
 from typing import Union, Tuple
 from dataset.multi30k import Multi30k
 from torch.utils.data import DataLoader
+from dataset.collate_fn import collate_fn
 
 for handler in logging.root.handlers[:]:
     handler.close()
@@ -23,10 +24,11 @@ if __name__ == "__main__":
     )
     multi_30k_train_loader = DataLoader(
         multi_30k_train_iter,
-        batch_size=1,
+        batch_size=128,
         shuffle=True,
+        collate_fn=collate_fn,
     )
-    for i, data in enumerate(multi_30k_train_loader):
-        logger.info(f"Batch {i}: {data}")
+    for i, (src_data, tgt_data) in enumerate(multi_30k_train_loader):
+        logger.info(f"Batch {i}: {src_data.shape}, {tgt_data.shape}")
         if i == 5:
             break
