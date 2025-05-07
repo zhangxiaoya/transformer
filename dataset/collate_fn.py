@@ -21,9 +21,9 @@ data_util = DataUtil()
 data_util.init_vocab(train_iter)
 
 # Init text transform which transforms text to tensor, including:
-# 1. Tokenization, added <BOS> and <EOS> tokens
-# 2. Vocabulary lookup
-# 3. Tensor conversion
+# 1. Tokenization
+# 2. Numericalization (Vocabulary lookup)
+# 3. Tensor conversion, added <BOS> and <EOS> tokens
 text_transform = data_util.init_text_transform()
 
 def collate_fn(batch):
