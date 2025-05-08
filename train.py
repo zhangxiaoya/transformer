@@ -35,7 +35,7 @@ def train_epoch(model, optimizer):
 
         src_mask, tgt_mask, src_padding_mask, tgt_padding_mask = create_mask(src, tgt_input)
 
-        logits = model(src, tgt_input, src_mask, tgt_mask,src_padding_mask, tgt_padding_mask, src_padding_mask)
+        logits = model(src, tgt_input, src_mask, tgt_mask, src_padding_mask, tgt_padding_mask, src_padding_mask)
 
         optimizer.zero_grad()
 
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     EMB_SIZE = 512
     NHEAD = 8
     FFN_HID_DIM = 512
-    BATCH_SIZE = 128
+    BATCH_SIZE = 8
     NUM_ENCODER_LAYERS = 3
     NUM_DECODER_LAYERS = 3
     # -- init model

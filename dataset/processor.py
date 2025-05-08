@@ -44,7 +44,7 @@ def create_mask(
     # For target squences, we need to create a mask that prevents the model from attending to future tokens.
     tgt_mask: torch.Tensor = generate_square_subsequent_mask(tgt_seq_len, device)
     # For source sequences, we not need to create a mask, so we can use a zero matrix.
-    src_mask: torch.Tensor = torch.zeros((src_seq_len, src_seq_len), device=device).type(torch.bool)
+    src_mask: torch.Tensor = torch.zeros((src_seq_len, src_seq_len), device=device)
 
     # Create padding masks for source and target sequences
     src_padding_mask: torch.Tensor = (src == PAD_IDX).transpose(0, 1)
