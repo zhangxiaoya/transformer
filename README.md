@@ -22,7 +22,7 @@ python -m spacy download en_core_web_sm
 ```
 pip install torch==2.2.0
 pip install torchtext==0.16.2
-pip install spacy
+pip install numpy=1.26.4 thinc==8.3.3 spacy
 pip install 'portalocker>=2.0.0'
 pip install torchdata
 ```
