@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     dataset_cache_dir = "/workspaces/dataset_cache"
-    # langeuage_pair = ("de", "en")
     SRC_LANGUAGE = "de"
     TGT_LANGUAGE = "en"
     multi_30k_train_iter = Multi30k(
@@ -22,6 +21,7 @@ if __name__ == "__main__":
         split="train",
         language_pair=(SRC_LANGUAGE, TGT_LANGUAGE),
     )
+
     multi_30k_train_loader = DataLoader(
         multi_30k_train_iter,
         batch_size=128,
