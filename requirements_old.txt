@@ -1,0 +1,15 @@
+# 核心依赖
+numpy>=1.23.0
+torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
+transformers>=4.30.0
+
+# 开发依赖
+pytest>=7.0.0
+mypy>=1.0.0
+ruff>=0.0.280
+black>=23.0.0
+isort>=5.10.0
+
+# 测试依赖
+pytest-cov>=4.0.0
+pytest-mock>=3.10.0
