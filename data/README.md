@@ -65,3 +65,76 @@ spm.model
 spm.vocab
 ```
 
+4. 加载分词模型并使用
+
+```Python
+sp = spm.SentencePieceProcessor()
+sp.load("spm.model")
+```
+- 分词
+```
+text = "我喜欢 Natural Language Processing"
+tokens = sp.encode(text, out_type=str)
+print(tokens)
+```
+
+- 输出
+['▁我', '▁喜欢', '▁Natural', '▁Language', '▁Processing']
+
+
+**▁** 表示“词起始”
+
+- 文本 → ID（最常用）
+```Python
+ids = sp.encode(text, out_type=int)
+print(ids)
+```
+
+- 加 BOS / EOS（翻译必备）
+```
+BOS = sp.bos_id()
+EOS = sp.eos_id()
+
+ids = [BOS] + ids + [EOS]
+```
+
+- Padding（Tensor 化前一步）
+```Python
+def pad(ids, max_len=50):
+    ids = ids[:max_len]
+    return ids + [sp.pad_id()] * (max_len - len(ids))
+```
+
+5. 完整：文本 → Tensor
+```Python
+import torch
+
+def text_to_tensor(text, max_len=50):
+    ids = [sp.bos_id()] + sp.encode(text, out_type=int) + [sp.eos_id()]
+    ids = ids[:max_len]
+    ids += [sp.pad_id()] * (max_len - len(ids))
+    return torch.tensor(ids, dtype=torch.long)
+
+x = text_to_tensor("我喜欢 NLP")
+print(x.shape)  # [50]
+```
+
+6. 反向：ID → 文本（推理必用）
+```Python
+ids = x.tolist()
+text = sp.decode(ids)
+print(text)
+```
+
+
+- 会自动忽略 <pad>
+
+7. 在 Transformer 训练中如何用（关键点）
+```Python
+# Encoder 输入（source）
+src = text_to_tensor(en_text)
+
+# Decoder 输入（target input）
+tgt_input = text_to_tensor(zh_text)[:-1]
+tgt_output = text_to_tensor(zh_text)[1:]
+```
