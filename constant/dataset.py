@@ -1,5 +1,6 @@
 # Dataset cache directory
 DATASET_CACHE_DIR = "/workspaces/dataset_cache"
+DATASET_CACHE_DIR = "/Users/ryancheung/workspace/dataset_cache"
 
 # Language pair
 SRC_LANGUAGE = "de"
