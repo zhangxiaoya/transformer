@@ -1,6 +1,6 @@
 # SentencePiece（SP）从 0 到可用的完整实战说明
 
-SentencePiece = 语言无关的子词分词器
+SentencePiece: 语言无关的子词分词器
 不需要分词规则，中文/英文/混合文本都能直接用
 
 1. 安装
